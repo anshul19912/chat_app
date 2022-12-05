@@ -4,8 +4,8 @@ import 'package:chat_app/widgets/pickers/user_image_picker.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
-  final void Function(String email, String password, String username, File image,
-      bool isLogin, BuildContext ctx) submitFn;
+  final void Function(String email, String password, String username,
+      File image, bool isLogin, BuildContext ctx) submitFn;
   bool isLoading;
 
   AuthForm({required this.submitFn, required this.isLoading});
@@ -20,7 +20,7 @@ class _AuthFormState extends State<AuthForm>
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
-  File? _userImageFile;
+  late File _userImageFile;
 
   void _pickedImage(File image) {
     _userImageFile = image;
@@ -30,9 +30,10 @@ class _AuthFormState extends State<AuthForm>
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus(); // will close the soft keyboard if open
     if (_userImageFile == null && !_isLogin) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Please pick an image'),
-          backgroundColor: Theme.of(context).errorColor, ));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Please pick an image'),
+        backgroundColor: Theme.of(context).errorColor,
+      ));
     }
     if (isValid) {
       _formKey.currentState!.save();
@@ -40,7 +41,7 @@ class _AuthFormState extends State<AuthForm>
           _emailController.text.trim(), // to remove extra wide spaces
           _passwordController.text.trim(),
           _usernameController.text.trim(),
-          _userImageFile!,
+          _userImageFile,
           _isLogin,
           context);
     }
@@ -59,11 +60,17 @@ class _AuthFormState extends State<AuthForm>
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (!_isLogin) UserImagePicker(imagePickFn:_pickedImage ,),
+                if (!_isLogin)
+                  UserImagePicker(
+                    imagePickFn: _pickedImage,
+                  ),
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(labelText: 'Email address'),
+                  autocorrect: false,
+                  textCapitalization: TextCapitalization.none,
+                  
                   validator: (value) {
                     if (value!.isEmpty || !value.contains('@')) {
                       return 'Invalid email!';
@@ -80,6 +87,9 @@ class _AuthFormState extends State<AuthForm>
                       return null;
                     },
                     decoration: InputDecoration(labelText: 'Username'),
+                    autocorrect: true,
+                    textCapitalization:TextCapitalization.words ,
+                 
                   ),
                 TextFormField(
                   controller: _passwordController,
