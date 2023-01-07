@@ -20,7 +20,10 @@ class ChatScreen extends StatelessWidget {
                     child: Container(
                       child: Row(
                         children: [
-                          Icon(Icons.exit_to_app),
+                          Icon(
+                            Icons.exit_to_app,
+                            color: Colors.black,
+                          ),
                           SizedBox(
                             width: 8,
                           ),

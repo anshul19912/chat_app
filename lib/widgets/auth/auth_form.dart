@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
   final void Function(String email, String password, String username,
-      File image, bool isLogin, BuildContext ctx) submitFn;
+      File? image, bool isLogin, BuildContext ctx) submitFn;
   bool isLoading;
 
   AuthForm({required this.submitFn, required this.isLoading});
@@ -20,7 +20,7 @@ class _AuthFormState extends State<AuthForm>
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
-  late File _userImageFile;
+  File? _userImageFile;
 
   void _pickedImage(File image) {
     _userImageFile = image;
@@ -51,6 +51,7 @@ class _AuthFormState extends State<AuthForm>
   Widget build(BuildContext context) {
     return Center(
       child: Card(
+        color: Colors.white60,
         margin: EdgeInsets.all(20),
         child: SingleChildScrollView(
             child: Padding(
@@ -70,7 +71,6 @@ class _AuthFormState extends State<AuthForm>
                   decoration: InputDecoration(labelText: 'Email address'),
                   autocorrect: false,
                   textCapitalization: TextCapitalization.none,
-                  
                   validator: (value) {
                     if (value!.isEmpty || !value.contains('@')) {
                       return 'Invalid email!';
@@ -88,8 +88,7 @@ class _AuthFormState extends State<AuthForm>
                     },
                     decoration: InputDecoration(labelText: 'Username'),
                     autocorrect: true,
-                    textCapitalization:TextCapitalization.words ,
-                 
+                    textCapitalization: TextCapitalization.words,
                   ),
                 TextFormField(
                   controller: _passwordController,

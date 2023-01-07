@@ -8,16 +8,9 @@ import 'package:flutter/material.dart';
 class Messages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: FirebaseAuth.instance.currentUser(),
-      builder: (context, futuresnapshot) {
-        if (futuresnapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+    final user = FirebaseAuth.instance.currentUser;
         return StreamBuilder(
-            stream: Firestore.instance
+            stream: FirebaseFirestore.instance
                 .collection('chat')
                 .orderBy('createdAt', descending: true)
                 .snapshots(),
@@ -29,20 +22,20 @@ class Messages extends StatelessWidget {
               }
               return ListView.builder(
                   reverse: true,
-                  itemCount: chatSnapshot.data!.documents.length,
+                  itemCount: chatSnapshot.data!.docs.length,
                   itemBuilder: ((context, index) => MessageBubble(
                         key: ValueKey(
-                            chatSnapshot.data!.documents[index].documentID),
-                        message: chatSnapshot.data!.documents[index]['text'],
-                        isMe: chatSnapshot.data!.documents[index]['userId'] ==
-                            futuresnapshot.data!.uid,
-                        username: chatSnapshot.data!.documents[index]
+                            chatSnapshot.data!.docs[index].id),
+                        message: chatSnapshot.data!.docs[index].data()['text'],
+                        isMe: chatSnapshot.data!.docs[index].data()['userId'] ==
+                            user!.uid,
+                        username: chatSnapshot.data!.docs[index].data()
                             ['username'],
-                        userImage: chatSnapshot.data!.documents[index]
+                        userImage: chatSnapshot.data!.docs[index].data()
                             ['userImage'],
                       )));
             });
-      },
-    );
+      
+    
   }
 }

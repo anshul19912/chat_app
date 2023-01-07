@@ -19,8 +19,8 @@ class _AuthScreenState extends State<AuthScreen> {
   var isLoading = false;
 
   void _submitAuthForm(String email, String password, String username,
-      File image, bool isLogin, BuildContext ctx) async {
-    AuthResult authResult;
+      File? image, bool isLogin, BuildContext ctx) async {
+    UserCredential authResult;
 
     try {
       setState(() {
@@ -38,15 +38,15 @@ class _AuthScreenState extends State<AuthScreen> {
       final ref = FirebaseStorage.instance
           .ref()
           .child('user_image')
-          .child(authResult.user.uid + '.jpg');
-      await ref.putFile(image).onComplete;
+          .child(authResult.user!.uid + '.jpg');
+      await ref.putFile(image!);
       final url = await ref.getDownloadURL();
-      
+
       //to store username and email in users collection
-      await Firestore.instance
+      await FirebaseFirestore.instance
           .collection('users')
-          .document(authResult.user.uid)
-          .setData({'username': username, 'email': email, 'image_url': url});
+          .doc(authResult.user!.uid)
+          .set({'username': username, 'email': email, 'image_url': url});
     } on PlatformException catch (e) {
       var message = 'An error occured, please check your credentials';
 
@@ -65,11 +65,18 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.orange,
-      body: AuthForm(
-        submitFn: _submitAuthForm,
-        isLoading: isLoading,
+    return Container(
+      decoration: BoxDecoration(
+    image: DecorationImage(
+      image: AssetImage("assets/images/image1.jpg"),
+      fit: BoxFit.cover,
+    ),),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: AuthForm(
+          submitFn: _submitAuthForm,
+          isLoading: isLoading,
+        ),
       ),
     );
   }
