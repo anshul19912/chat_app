@@ -106,7 +106,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             'Chat 24x7',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 40,
+                              fontSize: 45,
                               fontFamily: 'Anton',
                               fontWeight: FontWeight.normal,
                             ),
