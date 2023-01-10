@@ -18,8 +18,9 @@ class MyApp extends StatelessWidget {
         builder: (context, appSnapshot) {
           return MaterialApp(
             theme: ThemeData(
-                primarySwatch: Colors.purple,
-                accentColor: Colors.blue,
+                primarySwatch: Colors.teal,
+                accentColor: Colors.blueGrey,
+                fontFamily: 'Lato',
                 accentColorBrightness: Brightness.dark,
                 buttonTheme: ButtonTheme.of(context).copyWith(
                     buttonColor: Colors.orange,

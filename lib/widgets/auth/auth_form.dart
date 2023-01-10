@@ -1,6 +1,9 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:chat_app/models/http_exception.dart';
 import 'package:chat_app/widgets/pickers/user_image_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
@@ -35,8 +38,10 @@ class _AuthFormState extends State<AuthForm>
         backgroundColor: Theme.of(context).errorColor,
       ));
     }
+
     if (isValid) {
       _formKey.currentState!.save();
+
       widget.submitFn(
           _emailController.text.trim(), // to remove extra wide spaces
           _passwordController.text.trim(),
@@ -51,7 +56,7 @@ class _AuthFormState extends State<AuthForm>
   Widget build(BuildContext context) {
     return Center(
       child: Card(
-        color: Colors.white60,
+        color: Colors.white,
         margin: EdgeInsets.all(20),
         child: SingleChildScrollView(
             child: Padding(

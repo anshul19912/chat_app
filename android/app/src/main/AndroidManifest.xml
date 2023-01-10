@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.chat_app">
    <application
-        android:label="Chat Anytime"
+        android:label="Chat 24x7"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

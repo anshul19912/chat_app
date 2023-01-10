@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:chat_app/widgets/auth/auth_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -47,7 +48,7 @@ class _AuthScreenState extends State<AuthScreen> {
           .collection('users')
           .doc(authResult.user!.uid)
           .set({'username': username, 'email': email, 'image_url': url});
-    } on PlatformException catch (e) {
+    } on FirebaseAuthException catch (e) {
       var message = 'An error occured, please check your credentials';
 
       if (e.message != null) {
@@ -65,19 +66,57 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-    image: DecorationImage(
-      image: AssetImage("assets/images/image1.jpg"),
-      fit: BoxFit.cover,
-    ),),
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: Colors.transparent,
-        body: AuthForm(
-          submitFn: _submitAuthForm,
-          isLoading: isLoading,
-        ),
-      ),
-    );
+        body: Stack(children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/image1.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SingleChildScrollView(
+              child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(bottom: 20.0),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 94.0),
+                          transform: Matrix4.rotationZ(-8 * pi / 180)
+                            ..translate(-10.0), // used to rotate container
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.teal,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 8,
+                                color: Colors.black26,
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                          ),
+                          child: Text(
+                            'Chat 24x7',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 40,
+                              fontFamily: 'Anton',
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                        AuthForm(
+                          submitFn: _submitAuthForm,
+                          isLoading: isLoading,
+                        ),
+                      ]))),
+        ]));
   }
 }
