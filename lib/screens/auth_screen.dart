@@ -71,9 +71,11 @@ class _AuthScreenState extends State<AuthScreen> {
         body: Stack(children: [
           Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/image1.jpg"),
-                fit: BoxFit.cover,
+              gradient: LinearGradient(
+                colors: [Colors.blue, Colors.green],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                stops: [0, 1],
               ),
             ),
           ),
