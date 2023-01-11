@@ -13,35 +13,57 @@ class ChatScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Chats'),
         actions: [
-          DropdownButtonHideUnderline(
-            child: DropdownButton(
-                items: [
-                  DropdownMenuItem(
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.exit_to_app,
-                            color: Colors.black,
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Text('Logout')
-                        ],
-                      ),
+          PopupMenuButton(
+            icon: Icon(Icons.more_vert),
+            itemBuilder: (_) => [
+              PopupMenuItem(
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.tips_and_updates,
+                      color: Colors.black,
                     ),
-                    value: 'logout',
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text('Tip')
+                  ],
+                ),
+                value: 'tip',
+                onTap: () {},
+              ),
+              PopupMenuItem(
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.exit_to_app,
+                        color: Colors.black,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text('Logout')
+                    ],
                   ),
-                ],
-                onChanged: (itemIdentifier) {
-                  if (itemIdentifier == 'logout') {
-                    FirebaseAuth.instance.signOut();
-                  }
-                },
-                icon: Icon(Icons.more_vert,
-                    color: Theme.of(context).primaryIconTheme.color)),
-          )
+                  onTap: () => FirebaseAuth.instance.signOut()),
+            ],
+            onSelected: (itemIdentifier) {
+              if (itemIdentifier == 'tip') {
+                showDialog(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                          title: Text("Delete your Message"),
+                          content: Text(
+                              "Swipe your message from right to left to delete it."),
+                          actions: [
+                            TextButton(
+                                onPressed: () => Navigator.of(ctx).pop(),
+                                child: Text("Okay"))
+                          ],
+                        ));
+              }
+            },
+          ),
         ],
       ),
       body: Container(
