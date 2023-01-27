@@ -5,40 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer';
 
-class ChatScreen extends StatefulWidget {
+class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
-
-  @override
-  State<ChatScreen> createState() => _ChatScreenState();
-}
-
-class _ChatScreenState extends State<ChatScreen> {
-  late String uid = '';
-  late String userName = '';
-
-  Future<void> getUserName() async {
-    uid = await FirebaseAuth.instance.currentUser!.uid;
-    log(uid);
-
-    var userData = await FirebaseFirestore.instance
-        .collection('chat')
-        .where('userId', isEqualTo: uid)
-        .get();
-
-    try {
-      userName = await userData.docs[0]['username'];
-    } catch (e) {
-      userName = 'Unknown';
-    }
-    log(userName);
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getUserName();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +71,7 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Column(
           children: [
             Expanded(child: Messages()),
-            NewMessage(username: userName)
+            NewMessage()
           ],
         ),
       ),
