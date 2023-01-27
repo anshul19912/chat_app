@@ -4,19 +4,24 @@ import 'package:chat_app/screens/chat_screen.dart';
 import 'package:chat_app/screens/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Future<FirebaseApp> _initialization = Firebase.initializeApp();
     return FutureBuilder(
-        future: _initialization,
+        future: Firebase.initializeApp().then(
+            (value) => FirebaseMessaging.instance.subscribeToTopic("TPITO")),
         builder: (context, appSnapshot) {
           return MaterialApp(
-             debugShowCheckedModeBanner: false,
+            debugShowCheckedModeBanner: false,
             theme: ThemeData(
                 primarySwatch: Colors.teal,
                 accentColor: Colors.blueGrey,
