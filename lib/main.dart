@@ -23,15 +23,11 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-                primarySwatch: Colors.teal,
-                accentColor: Colors.blueGrey,
-                fontFamily: 'Lato',
-                accentColorBrightness: Brightness.dark,
-                buttonTheme: ButtonTheme.of(context).copyWith(
-                    buttonColor: Colors.orange,
-                    textTheme: ButtonTextTheme.primary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)))),
+              primarySwatch: Colors.teal,
+              accentColor: Colors.blueGrey,
+              fontFamily: 'Lato',
+              accentColorBrightness: Brightness.dark,
+            ),
             home: appSnapshot.connectionState != ConnectionState.done
                 ? SplashScreen()
                 : StreamBuilder(

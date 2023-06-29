@@ -19,11 +19,13 @@ class Messages extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
+          if (chatSnapshot.data == null) {
+            Navigator.of(context).pop();
+          }
           return ListView.builder(
               reverse: true,
               itemCount: chatSnapshot.data!.docs.length,
               itemBuilder: ((context, index) => MessageBubble(
-                
                     id: chatSnapshot.data!.docs[index].id,
                     message: chatSnapshot.data!.docs[index].data()['text'],
                     isMe: chatSnapshot.data!.docs[index].data()['userId'] ==
@@ -31,6 +33,9 @@ class Messages extends StatelessWidget {
                     username: chatSnapshot.data!.docs[index].data()['username'],
                     userImage:
                         chatSnapshot.data!.docs[index].data()['userImage'],
+                    userid: chatSnapshot.data!.docs[index].data()['userId'],
+                    createdat:
+                        chatSnapshot.data!.docs[index].data()['createdAt'],
                   )));
         });
   }

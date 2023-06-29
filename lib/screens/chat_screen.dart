@@ -5,12 +5,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer';
 
+import 'edit_profile_screen.dart';
+
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.teal[50],
       appBar: AppBar(
         title: Text('Chats'),
         actions: [
@@ -21,17 +24,32 @@ class ChatScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Icon(
+                      Icons.manage_accounts,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text('My Profile')
+                  ],
+                ),
+                value: 'profile',
+                onTap: () {},
+              ),
+              PopupMenuItem(
+                child: Row(
+                  children: [
+                    Icon(
                       Icons.tips_and_updates,
                       color: Colors.black,
                     ),
                     SizedBox(
                       width: 8,
                     ),
-                    Text('Tip')
+                    Text('Tips')
                   ],
                 ),
                 value: 'tip',
-                onTap: () {},
               ),
               PopupMenuItem(
                   child: Row(
@@ -53,9 +71,9 @@ class ChatScreen extends StatelessWidget {
                 showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
-                          title: Text("Delete your Message"),
+                          title: Text("Tips"),
                           content: Text(
-                              "Swipe your message from right to left to delete it."),
+                              "1- Swipe your message from right to left to delete it. \n2- Long press on the message to view when it was sent."),
                           actions: [
                             TextButton(
                                 onPressed: () => Navigator.of(ctx).pop(),
@@ -63,16 +81,17 @@ class ChatScreen extends StatelessWidget {
                           ],
                         ));
               }
+              if (itemIdentifier == 'profile') {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => EditProfileScreen()));
+              }
             },
           ),
         ],
       ),
       body: Container(
         child: Column(
-          children: [
-            Expanded(child: Messages()),
-            NewMessage()
-          ],
+          children: [Expanded(child: Messages()), NewMessage()],
         ),
       ),
     );

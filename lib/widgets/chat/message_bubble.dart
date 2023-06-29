@@ -1,7 +1,11 @@
 import 'dart:developer';
 
+import 'package:chat_app/screens/user_profile_screen.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class MessageBubble extends StatelessWidget {
   MessageBubble(
@@ -10,57 +14,142 @@ class MessageBubble extends StatelessWidget {
       required this.message,
       required this.isMe,
       required this.username,
-      required this.userImage});
+      required this.userImage,
+      required this.userid,
+      required this.createdat});
 
   final String id;
   final String message;
   final String username;
   final bool isMe;
   final String userImage;
+  final String userid;
+  final Timestamp createdat;
 
+  // String time = DateFormat('dd-MM-yyy').format(createdAt);
   @override
   Widget build(BuildContext context) {
     final selectedmessage = FirebaseFirestore.instance.collection('chat');
+    DateTime time = createdat.toDate();
+    String formattedTime = DateFormat.yMMMMd().add_jm().format(time);
 
     return isMe
-        ? Dismissible(
-            key: ValueKey(id),
-            background: Container(
-              color: Theme.of(context).errorColor,
-              child: Icon(
-                Icons.delete,
-                color: Colors.white,
-                size: 40,
+        ? GestureDetector(
+            onLongPress: () => showDialog(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                title: Text("This message was sent at:"),
+                content: Text(formattedTime),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: Text("Okay")),
+                ],
               ),
-              alignment: Alignment.centerRight,
-              padding: EdgeInsets.only(right: 20),
             ),
-            direction: DismissDirection
-                .endToStart, // will only swipe from right to left
-            confirmDismiss: (direction) {
-              return showDialog(
-                context: context,
-                builder: (ctx) => AlertDialog(
-                  title: Text("Are you Sure?"),
-                  content: Text("Do you want to delete this message.?"),
-                  actions: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.of(ctx).pop(false);
-                        },
-                        child: Text("No")),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.of(ctx).pop(true);
-                        },
-                        child: Text("Yes")),
-                  ],
+            child: Dismissible(
+              key: ValueKey(id),
+              background: Container(
+                color: Theme.of(context).errorColor,
+                child: Icon(
+                  Icons.delete,
+                  color: Colors.white,
+                  size: 40,
                 ),
-              );
-            },
-            onDismissed: ((direction) async {
-              await selectedmessage.doc(id).delete();
-            }),
+                alignment: Alignment.centerRight,
+                padding: EdgeInsets.only(right: 20),
+              ),
+              direction: DismissDirection
+                  .endToStart, // will only swipe from right to left
+              confirmDismiss: (direction) {
+                return showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: Text("Are you Sure?"),
+                    content: Text("Do you want to delete this message.?"),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(ctx).pop(false);
+                          },
+                          child: Text("No")),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(ctx).pop(true);
+                          },
+                          child: Text("Yes")),
+                    ],
+                  ),
+                );
+              },
+              onDismissed: ((direction) async {
+                await selectedmessage.doc(id).delete();
+              }),
+              child: Stack(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(12),
+                                bottomLeft: Radius.circular(12),
+                                bottomRight: Radius.circular(0))),
+                        width: 150,
+                        padding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                        margin:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(username,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                )),
+                            Text(
+                              message,
+                              style: TextStyle(color: Colors.black),
+                              textAlign: TextAlign.end,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Positioned(
+                      top: -10,
+                      left: null,
+                      right: 120,
+                      child: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(userImage),
+                      )),
+                ],
+                clipBehavior: Clip.none,
+              ),
+            ),
+          )
+        : GestureDetector(
+            onLongPress: () => showDialog(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                title: Text("This message was sent at:"),
+                content: Text(formattedTime),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: Text("Okay")),
+                ],
+              ),
+            ),
             child: Stack(
               children: [
                 Row(
@@ -69,46 +158,34 @@ class MessageBubble extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          color: isMe
-                              ? Colors.grey
-                              : Theme.of(context).accentColor,
+                          color: Theme.of(context).accentColor,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(12),
                               topRight: Radius.circular(12),
-                              bottomLeft: !isMe
-                                  ? Radius.circular(0)
-                                  : Radius.circular(12),
-                              bottomRight: isMe
-                                  ? Radius.circular(0)
-                                  : Radius.circular(12))),
-                      width: 140,
+                              bottomLeft: Radius.circular(0),
+                              bottomRight: Radius.circular(12))),
+                      width: 150,
                       padding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
                       child: Column(
-                        crossAxisAlignment: isMe
-                            ? CrossAxisAlignment.end
-                            : CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(username,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: isMe
-                                      ? Colors.black
-                                      : Theme.of(context)
-                                          .accentTextTheme
-                                          .headline1!
-                                          .color)),
+                                  color: Theme.of(context)
+                                      .accentTextTheme
+                                      .headline1!
+                                      .color)),
                           Text(
                             message,
                             style: TextStyle(
-                                color: isMe
-                                    ? Colors.black
-                                    : Theme.of(context)
-                                        .accentTextTheme
-                                        .headline1!
-                                        .color),
-                            textAlign: isMe ? TextAlign.end : TextAlign.start,
+                                color: Theme.of(context)
+                                    .accentTextTheme
+                                    .headline1!
+                                    .color),
+                            textAlign: TextAlign.start,
                           ),
                         ],
                       ),
@@ -117,82 +194,21 @@ class MessageBubble extends StatelessWidget {
                 ),
                 Positioned(
                     top: -10,
-                    left: isMe ? null : 120,
-                    right: isMe ? 120 : null,
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(userImage),
-                    )),
+                    left: 120,
+                    right: null,
+                    child: GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    UserProfileScreen(userid: userid))),
+                        child: CircleAvatar(
+                          backgroundImage:
+                              CachedNetworkImageProvider(userImage),
+                        ))),
               ],
               clipBehavior: Clip.none,
             ),
-          )
-        : Stack(
-            children: [
-              Row(
-                mainAxisAlignment:
-                    isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color:
-                            isMe ? Colors.grey : Theme.of(context).accentColor,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(12),
-                            topRight: Radius.circular(12),
-                            bottomLeft: !isMe
-                                ? Radius.circular(0)
-                                : Radius.circular(12),
-                            bottomRight: isMe
-                                ? Radius.circular(0)
-                                : Radius.circular(12))),
-                    width: 140,
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-                    child: Column(
-                      crossAxisAlignment: isMe
-                          ? CrossAxisAlignment.end
-                          : CrossAxisAlignment.start,
-                      children: [
-                        Text(username,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: isMe
-                                    ? Colors.black
-                                    : Theme.of(context)
-                                        .accentTextTheme
-                                        .headline1!
-                                        .color)),
-                        Text(
-                          message,
-                          style: TextStyle(
-                              color: isMe
-                                  ? Colors.black
-                                  : Theme.of(context)
-                                      .accentTextTheme
-                                      .headline1!
-                                      .color),
-                          textAlign: isMe ? TextAlign.end : TextAlign.start,
-                        ),
-                      ],
-                    ),
-                  ),
-                  // if (isMe)
-                  //   IconButton(
-                  //       onPressed: () async {
-                  //         await selectedmessage.doc(id).delete();
-                  //       },
-                  //       icon: Icon(Icons.delete)),
-                ],
-              ),
-              Positioned(
-                  top: -10,
-                  left: isMe ? null : 120,
-                  right: isMe ? 120 : null,
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(userImage),
-                  )),
-            ],
-            clipBehavior: Clip.none,
           );
   }
 }
