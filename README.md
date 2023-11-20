@@ -16,19 +16,16 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 
-![Screenshot_20231121-000540](https://github.com/anshul19912/chat_app/assets/87997769/4fe56360-e5fa-40dc-82c8-260f8d5cb1ee)
-
-![Screenshot_20231121-000722](https://github.com/anshul19912/chat_app/assets/87997769/15d9a559-17dd-4f90-bb77-6782c5f54b63)
-![Screenshot_20231121-000741](https://github.com/anshul19912/chat_app/assets/87997769/b608f4b2-10cc-42d1-a395-95151d67eabe)
-
-![Screenshot_20231121-001346](https://github.com/anshul19912/chat_app/assets/87997769/30839a3b-e977-4b46-9774-ec6c2c78fd59)
-![Screenshot_20231121-001824](https://github.com/anshul19912/chat_app/assets/87997769/2e7e65b5-397d-45e0-a1d0-365164202661)
-![Screenshot_20231121-001927_One UI Home](https://github.com/anshul19912/chat_app/assets/87997769/e8ad0f78-ab53-4df8-8f48-c4eb644088e0)
-![Screenshot_20231121-002130](https://github.com/anshul19912/chat_app/assets/87997769/fc39676d-f594-495e-9fdd-c9f2![Screenshot_20231121-002139](https://github.com/anshul19912/chat_app/assets/87997769/6125e9ed-380b-4456-98dd-be9849653ac7)
-841804a3)
-![Screenshot_20231121-002148](https://github.com/anshul19912/chat_app/assets/87997769/8c239465-534b-4339-a917-ac2cbaa4d5d1)# chat_app
-![Uploadin![Screenshot_20231121-002155](https://github.com/anshul19912/chat_app/assets/87997769/1ae96474-0138-4e7f-9957-66d44f275e45)
-g Screenshot_20231121-002148.jpg…]()
-![Screenshot_20231121-002202](https://github.com/anshul19912/chat_app/assets/87997769/5cb8e01e-dcad-4944-bdcc-fba41cdfffac)![Screenshot_20231121-002213](https://github.com/anshul19912/chat_app/assets/87997769/f3571fec-d1e2-43c8-b610-75982e820d72)
-![Screenshot_20231121-002218](https://github.com/anshul19912/chat_app/assets/87997769/6a9ed3cc-ef7b-4c44-a9c9-f7e90c54abcf)
-
+![Screenshot_20231121-000540](https://github.com/anshul19912/chat_app/assets/87997769/20025edc-83d6-422f-bc14-04bbc22c3ecd)
+![Screenshot_20231121-000722](https://github.com/anshul19912/chat_app/assets/87997769/f7a9cb68-d7cd-4611-95db-92b2aa9a3157)
+![Screenshot_20231121-000741](https://github.com/anshul19912/chat_app/assets/87997769/74f6c9b3-c90b-49b3-b9ad-04fdca81d76f)
+![Screenshot_20231121-001346](https://github.com/anshul19912/chat_app/assets/87997769/00ac3d2d-206f-4098-a05e-d316b79480d7)
+![Screenshot_20231121-001824](https://github.com/anshul19912/chat_app/assets/87997769/d2c05fec-b417-49d1-851f-1818b59812dc)
+![Screenshot_20231121-001927_One UI Home](https://github.com/anshul19912/chat_app/assets/87997769/295e1134-36a7-4fb7-80b7-2d3b1e948946)
+![Screenshot_20231121-002130](https://github.com/anshul19912/chat_app/assets/87997769/a27b8994-7640-499e-af80-a800b5e63679)
+![Screenshot_20231121-002139](https://github.com/anshul19912/chat_app/assets/87997769/7aef0f21-ad16-47e1-b1c1-2f4ebb9d8c7a)
+![Screenshot_20231121-002148](https://github.com/anshul19912/chat_app/assets/87997769/03109c6a-e415-41d9-a280-234ec3ea47a5)
+![Screenshot_20231121-002155](https://github.com/anshul19912/chat_app/assets/87997769/8c2f6cdb-1f06-4d7b-b03f-74ddd0cce655)
+![Screenshot_20231121-002202](https://github.com/anshul19912/chat_app/assets/87997769/8d93e838-4f5f-4ae7-8788-ec978bc89eab)
+![Screenshot_20231121-002213](https://github.com/anshul19912/chat_app/assets/87997769/dc09f73b-2a80-47e3-8362-d86d2694a527)
+![Screenshot_20231121-002218](https://github.com/anshul19912/chat_app/assets/87997769/a50a494a-8042-4c4a-b0e7-0b4baad42580)
