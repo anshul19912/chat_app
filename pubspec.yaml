@@ -48,7 +48,7 @@ dependencies:
   http: ^0.13.5
   uuid: ^3.0.7
   intl: ^0.18.1
-  cached_network_image: ^3.2.3
+  cached_network_image: ^3.3.0
   
 
 dev_dependencies:

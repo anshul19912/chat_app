@@ -69,13 +69,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+            backgroundColor: Colors.teal,
             title: Text(editprofile ? "Edit Profile" : 'Change Password')),
         backgroundColor: Colors.teal[50],
         body: Center(
           child: isLoading
               ? CircularProgressIndicator()
               : Card(
-                  color: Colors.blue[200],
+                  color: Colors.green[50],
                   margin: EdgeInsets.all(20),
                   child: Padding(
                     padding: EdgeInsets.all(16),

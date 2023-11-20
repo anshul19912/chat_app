@@ -13,8 +13,9 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown,
+      backgroundColor: Colors.teal[50],
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: Text('Chats'),
         actions: [
           PopupMenuButton(

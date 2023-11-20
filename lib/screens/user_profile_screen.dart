@@ -51,6 +51,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: Text('View Profile'),
       ),
       backgroundColor: Colors.teal[50],
@@ -66,7 +67,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     image: CachedNetworkImageProvider(userImage),
                   ),
                   Card(
-                    color: Colors.blue,
+                    color: Colors.green[50],
                     margin: EdgeInsets.all(18),
                     child: Padding(
                       padding: EdgeInsets.all(16),

@@ -24,7 +24,7 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
       ),
       body: Center(
         child: Card(
-          color: Colors.blue,
+          color: Colors.teal[50],
           margin: EdgeInsets.all(20),
           child: Padding(
             padding: EdgeInsets.all(16),
