@@ -63,7 +63,9 @@ class _NewMessageState extends State<NewMessage> {
           Expanded(
               child: TextField(
             controller: messagecontroller,
-            decoration: InputDecoration(labelText: 'Send a Message'),
+            decoration: InputDecoration(
+                labelText: 'Send a Message',
+                labelStyle: TextStyle(color: Colors.black)),
             onChanged: (value) {
               // this will execute on every key stroke
               setState(() {

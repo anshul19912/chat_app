@@ -75,7 +75,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: isLoading
               ? CircularProgressIndicator()
               : Card(
-                  color: Colors.green[50],
+                  color: Colors.blue[200],
                   margin: EdgeInsets.all(20),
                   child: Padding(
                     padding: EdgeInsets.all(16),

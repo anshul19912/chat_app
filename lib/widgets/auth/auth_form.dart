@@ -35,7 +35,7 @@ class _AuthFormState extends State<AuthForm>
           ),
         Center(
           child: Card(
-            color: Colors.green[50],
+            color: Colors.brown,
             margin: EdgeInsets.all(15),
             child: Padding(
               padding: EdgeInsets.all(10),

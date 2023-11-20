@@ -22,12 +22,14 @@ class UserImagePicker extends StatefulWidget {
 class _UserImagePickerState extends State<UserImagePicker> {
   File? _pickedImage;
   void pickImage() async {
-    final pickedImageFile = await ImagePicker.pickImage(
+    final pickedImageFile = await ImagePicker().pickImage(
         source: ImageSource.gallery, imageQuality: 70, maxWidth: 200);
     setState(() {
-      _pickedImage = pickedImageFile;
+      _pickedImage = pickedImageFile == null ? null : File(pickedImageFile.path);
     });
-    widget.imagePickFn(pickedImageFile);
+    if (pickedImageFile != null) {
+    widget.imagePickFn(File(pickedImageFile.path));
+  }
   }
 
   @override

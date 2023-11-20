@@ -56,9 +56,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       backgroundColor: Colors.teal[50],
       body: Center(
         child: isLoading
-            ? CircularProgressIndicator(
-                
-              )
+            ? CircularProgressIndicator()
             : Column(
                 children: [
                   SizedBox(
@@ -68,7 +66,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     image: CachedNetworkImageProvider(userImage),
                   ),
                   Card(
-                    color: Colors.green[50],
+                    color: Colors.blue,
                     margin: EdgeInsets.all(18),
                     child: Padding(
                       padding: EdgeInsets.all(16),

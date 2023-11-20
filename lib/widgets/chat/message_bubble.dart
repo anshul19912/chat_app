@@ -158,7 +158,7 @@ class MessageBubble extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          color: Theme.of(context).accentColor,
+                           color: Theme.of(context).colorScheme.secondary,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(12),
                               topRight: Radius.circular(12),
@@ -175,14 +175,14 @@ class MessageBubble extends StatelessWidget {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Theme.of(context)
-                                      .accentTextTheme
+                                      .textTheme
                                       .headline1!
                                       .color)),
                           Text(
                             message,
                             style: TextStyle(
                                 color: Theme.of(context)
-                                    .accentTextTheme
+                                    .textTheme
                                     .headline1!
                                     .color),
                             textAlign: TextAlign.start,

@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:chat_app/screens/auth_screen.dart';
 import 'package:chat_app/screens/chat_screen.dart';
 import 'package:chat_app/screens/splash_screen.dart';
@@ -23,10 +22,12 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              primarySwatch: Colors.teal,
-              accentColor: Colors.blueGrey,
+              colorScheme: ColorScheme.fromSwatch(
+                primarySwatch: Colors.teal,
+                accentColor: Colors.black,
+                brightness: Brightness.dark,
+              ),
               fontFamily: 'Lato',
-              accentColorBrightness: Brightness.dark,
             ),
             home: appSnapshot.connectionState != ConnectionState.done
                 ? SplashScreen()
